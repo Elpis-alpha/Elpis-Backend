@@ -1,6 +1,6 @@
 const jsonwebtoken = require('jsonwebtoken')
 
-const User = require('../models/User')
+const Website = require('../models/Website')
 
 
 const auth = async (req, res, next) => {
@@ -11,13 +11,13 @@ const auth = async (req, res, next) => {
 
     const decoded = jsonwebtoken.verify(token, process.env.JWT_SECRET)
 
-    const user = await User.findOne({ _id: decoded._id, 'tokens.token':token })
+    const website = await Website.findOne({ _id: decoded._id, 'tokens.token':token })
 
-    if (!user) throw new Error('Invalid Token')
+    if (!website) throw new Error('Invalid Token')
       
     req.token = token
 
-    req.user = user
+    req.website = website
 
     next()
 

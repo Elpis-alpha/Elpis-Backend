@@ -10,9 +10,7 @@ const hbs = require('hbs')
 
 const mongoose = require('./db/mongoose')
 
-const userRouter = require('./routers/user')
-
-const itemRouter = require('./routers/item')
+const websiteRouter = require('./routers/website')
 
 const renderRouter = require('./routers/render')
 
@@ -75,12 +73,8 @@ app.use(cors())
 if (!isProduction) { app.use(delay) }
 
 
-// Automatically allows user routers
-app.use(userRouter)
-
-
-// Automatically allows task routers
-app.use(itemRouter)
+// Automatically allows website routers
+app.use(websiteRouter)
 
 
 // Automatically allows html routers
