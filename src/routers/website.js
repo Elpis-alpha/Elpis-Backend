@@ -20,8 +20,6 @@ router.post('/api/websites', async (req, res) => {
 
     const token = await newWebsite.generateAuthToken()
 
-    const verifyWebsite = await newWebsite.sendVerificationEmail()
-
     res.status(201).send({ website: newWebsite, token })
 
   } catch (error) {
@@ -99,50 +97,6 @@ router.post('/api/websites/logout/all', auth, async (req, res) => {
 router.get('/api/websites/website', auth, async (req, res) => {
 
   res.send(req.website)
-
-})
-
-
-// sends get request to fetch website by id
-router.get('/api/websites/id/:id', async (req, res) => {
-
-  const _id = req.params.id
-
-  try {
-
-    const website = await Website.findById(_id)
-
-    if (!website) return errorJson(res, 404)
-
-    res.send(website.toPublicJSON())
-
-  } catch (e) {
-
-    return errorJson(res, 500)
-
-  }
-
-})
-
-
-// sends get request to fetch website by email
-router.get('/api/websites/email/:email', async (req, res) => {
-
-  const email = req.params.email
-
-  try {
-
-    const website = await Website.findOne({ email: email })
-
-    if (!website) return errorJson(res, 404)
-
-    res.send(website.toPublicJSON())
-
-  } catch (e) {
-
-    return errorJson(res, 500)
-
-  }
 
 })
 

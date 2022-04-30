@@ -84,16 +84,10 @@ websiteSchemer.methods.toJSON = function () {
   const website = this
 
   const returnWebsite = website.toObject()
-
-  returnWebsite.verify = returnWebsite.verify === "true"
   
   delete returnWebsite.password
   
   delete returnWebsite.tokens
-
-  delete returnWebsite.avatar
-
-  delete returnWebsite.avatarSmall
 
   return returnWebsite
 
