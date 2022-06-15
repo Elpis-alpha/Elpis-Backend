@@ -1,3 +1,7 @@
+require('./middleware/init')
+
+require('./db/mongoose')
+
 const express = require('express')
 
 const chalk = require('chalk')
@@ -8,17 +12,18 @@ const path = require('path')
 
 const hbs = require('hbs')
 
-const mongoose = require('./db/mongoose')
-
 const websiteRouter = require('./routers/website')
 
 const renderRouter = require('./routers/render')
 
 const _404Router = require('./routers/404')
 
+const paymentRouter = require('./routers/payment')
+
 const delay = require('./middleware/delay')
 
 const mailRouter = require('./routers/mail')
+
 
 const port = process.env.PORT
 
@@ -75,6 +80,10 @@ if (!isProduction) { app.use(delay) }
 
 // Automatically allows website routers
 app.use(websiteRouter)
+
+
+// Automatically allows payment routers
+app.use(paymentRouter)
 
 
 // Automatically allows html routers
