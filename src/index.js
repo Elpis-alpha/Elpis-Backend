@@ -101,8 +101,8 @@ app.use(_404Router)
 // Listening Server
 app.listen(port, () => {
 
-  console.log(chalk.yellow('\n\nInitializing Server'));
-
   console.log(chalk.hex('#009e00')(`Server started successfully on port ${port}`));
+
+  console.log(chalk.cyanBright(`Server time: ${new Date().toLocaleString()}`));
 
 })
